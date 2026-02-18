@@ -27,16 +27,21 @@ export default function PlotTab({
   const originalHeight = 1000;
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 h-[calc(100vh-250px)]">
-      {/* Sidebar mit Filtern und dem neuen Zoom-Slider */}
-      <aside className="w-full md:w-64 flex-shrink-0 bg-white p-5 rounded-xl border border-slate-200 shadow-sm self-start">
-        <div className="space-y-6">
 
-          {/* Type Selection */}
-          <div>
-            <label className="block text-[10px] font-black text-slate-400 uppercase mb-1">
-              Type Selection
-            </label>
+    /* flex-col für mobile (Standard), md:flex-row für Desktop */
+    <div className="flex flex-col md:flex-row gap-4 md:gap-6 h-full">
+    
+      {/* Sidebar mit Filtern und dem neuen Zoom-Slider */}
+
+      {/* Sidebar wird zur Top-Bar auf Mobile */}
+      <aside className="w-full md:w-64 flex-shrink-0 bg-white p-4 md:p-5 rounded-xl border border-slate-200 shadow-sm">
+        <div className="flex flex-col sm:flex-row md:flex-col gap-4">
+
+          {/* Die Filter-Elemente */}
+          <div className="flex-1">
+            {/* Type Selection */}
+            <label className="block text-[10px] font-black text-slate-400 uppercase mb-1">Type Selection</label>
+
             <select 
               value={typeSelection} 
               onChange={(e) => setTypeSelection(e.target.value)}
@@ -45,15 +50,13 @@ export default function PlotTab({
             >
               <option value="backward">Backward (Target Date)</option>
               <option value="forward">Forward (Model Run)</option>
+
             </select>
           </div>
 
-
           {/* Date Selection */}
-          <div>
-            <label className="block text-[10px] font-black text-slate-400 uppercase mb-1">
-              Date Selection
-            </label>
+          <div className="flex-1">
+            <label className="block text-[10px] font-black text-slate-400 uppercase mb-1">Date Selection</label>
             <input 
               type="date" 
               value={dateSelection} 
@@ -62,15 +65,13 @@ export default function PlotTab({
               onChange={(e) => setDateSelection(e.target.value)}
               /* "scheme-light" erzwingt das Standard-Icon in Edge/Chrome */
               className="w-full p-2 bg-white border border-slate-300 rounded text-sm font-bold text-slate-900 color-scheme-light focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              style={{ colorScheme: 'light' }} 
+              style={{ colorScheme: 'light' }}
             />
           </div>
 
           {/* Der neue Skalierungs-Slider */}
-          <div className="pt-4 border-t border-slate-100">
-            <label className="block text-[10px] font-black text-slate-400 uppercase mb-2">
-              Karten-Zoom: {Math.round(scale * 100)}%
-            </label>
+          <div className="flex-1 pt-2 md:pt-4 md:border-t">
+            <label className="block text-[10px] font-black text-slate-400 uppercase mb-2 text-center md:text-left">Zoom</label>
             <input 
               type="range" 
               min="0.3" 
@@ -85,13 +86,14 @@ export default function PlotTab({
               <span>100%</span>
             </div>
           </div>
+
         </div>
       </aside>
 
       {/* Hauptbereich für die Karten */}
       
-      <div className="flex-grow overflow-auto p-4 bg-slate-100 rounded-xl">
-        <div className="flex flex-row flex-nowrap gap-4 items-start min-h-max w-max">
+      <div className="flex-grow overflow-x-auto overflow-y-hidden p-4 bg-slate-100 rounded-xl min-h-[500px]">
+        <div className="flex flex-row flex-nowrap gap-4 items-start w-max">
           {displayDates.map(dateKey => {
             // HIER die wichtige Unterscheidung beim Filtern der Karten-Daten
             const cardData = filteredRows.filter(r => 

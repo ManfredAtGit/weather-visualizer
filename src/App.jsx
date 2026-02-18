@@ -134,11 +134,21 @@ export default function App() {
         {/* Optional: Hier könnten noch User-Infos oder ein Settings-Icon stehen */}
       </header>
 
-      
-      <nav className="bg-white border-b flex justify-center">
-        {['info', 'plot', 'help'].map(t => (
-          <button key={t} onClick={() => setActiveTab(t)} className={`px-8 py-4 text-sm font-bold uppercase ${activeTab === t ? 'border-b-4 border-blue-600 text-blue-600' : 'text-gray-400'}`}>{t}</button>
-        ))}
+      <nav className="bg-white border-b flex justify-center overflow-x-auto no-scrollbar">
+        <div className="flex flex-nowrap min-w-full sm:min-w-0">
+          {['info', 'plot', 'help'].map(t => (
+            <button 
+              key={t} 
+              onClick={() => setActiveTab(t)} 
+              className={`flex-1 sm:flex-none px-6 md:px-12 py-3 md:py-4 text-xs md:text-sm font-bold uppercase transition-colors
+                ${activeTab === t 
+                  ? 'border-b-4 border-blue-600 text-blue-600' 
+                  : 'text-gray-400 hover:text-gray-600'}`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
       </nav>
 
       <main className="flex-grow container mx-auto p-6 max-w-7xl">
