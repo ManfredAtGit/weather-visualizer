@@ -44,7 +44,7 @@ export default function InfoTab({ loadingState, stats }) {
       {/* Optional: Status-Anzeige */}
       <div className="text-center py-4">
         <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase ${loadingState === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-          Status: {loadingState}
+          Loading Status: {loadingState}
         </span>
       </div>
     </div>
