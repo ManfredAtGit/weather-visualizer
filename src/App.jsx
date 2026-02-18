@@ -110,19 +110,19 @@ export default function App() {
           {/* Container für mehrere animierte SVGs */}
           <div className="flex items-center gap-3">
             <img 
-              src="/online-icons/thunderstorms-day-rain-line.svg" 
+              src="./online-icons/thunderstorms-day-rain-line.svg" 
               alt="Animation 1" 
               className="w-12 h-12 object-contain hover:scale-110 transition-transform"
               /* Falls die Animation per CSS gesteuert werden muss, 
                 kannst du hier noch Klassen hinzufügen */
             />
             <img 
-              src="/online-icons/wetter-verlauf.svg" 
+              src="./online-icons/wetter-verlauf.svg" 
               alt="Animation 2" 
               className="w-12 h-12 object-contain hover:scale-110 transition-transform"
             />
             <img 
-              src="/online-icons/windsock-line.svg" 
+              src="./online-icons/windsock-line.svg" 
               alt="Animation 3" 
               className="w-12 h-12 object-contain hover:scale-110 transition-transform"
             />

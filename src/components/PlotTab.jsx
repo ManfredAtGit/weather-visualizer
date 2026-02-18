@@ -31,17 +31,39 @@ export default function PlotTab({
       {/* Sidebar mit Filtern und dem neuen Zoom-Slider */}
       <aside className="w-full md:w-64 flex-shrink-0 bg-white p-5 rounded-xl border border-slate-200 shadow-sm self-start">
         <div className="space-y-6">
+
+          {/* Type Selection */}
           <div>
-            <label className="block text-[10px] font-black text-slate-400 uppercase mb-1">Type Selection</label>
-            <select value={typeSelection} onChange={(e) => setTypeSelection(e.target.value)} className="w-full p-2 bg-slate-50 border rounded text-sm font-bold">
+            <label className="block text-[10px] font-black text-slate-400 uppercase mb-1">
+              Type Selection
+            </label>
+            <select 
+              value={typeSelection} 
+              onChange={(e) => setTypeSelection(e.target.value)}
+              /* text-slate-900 sorgt dafür, dass der Text nicht weiß auf weiß ist */
+              className="w-full p-2 bg-white border border-slate-300 rounded text-sm font-bold text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            >
               <option value="backward">Backward (Target Date)</option>
               <option value="forward">Forward (Model Run)</option>
             </select>
           </div>
 
+
+          {/* Date Selection */}
           <div>
-            <label className="block text-[10px] font-black text-slate-400 uppercase mb-1">Date Selection</label>
-            <input type="date" value={dateSelection} min={dateRange.min} max={dateRange.max} onChange={(e) => setDateSelection(e.target.value)} className="w-full p-2 bg-slate-50 border rounded text-sm font-bold" />
+            <label className="block text-[10px] font-black text-slate-400 uppercase mb-1">
+              Date Selection
+            </label>
+            <input 
+              type="date" 
+              value={dateSelection} 
+              min={dateRange?.min} 
+              max={dateRange?.max} 
+              onChange={(e) => setDateSelection(e.target.value)}
+              /* "scheme-light" erzwingt das Standard-Icon in Edge/Chrome */
+              className="w-full p-2 bg-white border border-slate-300 rounded text-sm font-bold text-slate-900 color-scheme-light focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              style={{ colorScheme: 'light' }} 
+            />
           </div>
 
           {/* Der neue Skalierungs-Slider */}

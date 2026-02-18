@@ -174,7 +174,7 @@ if (!data || data.length === 0 || !yRange) return null;
             ],
 
             images: [{
-              source: `/online-icons/w_${row.weather_type}.svg`,
+              source: `./online-icons/w_${row.weather_type}.svg`,
               xref: "x",
               yref: "y",
               x: 1,
