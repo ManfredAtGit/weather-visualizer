@@ -1,15 +1,12 @@
-import React from 'react';
-import GraphStack from './GraphStack';
-
 export default function InfoTab({ loadingState, stats, maeStatsLoadingState, maeStats }) {
   if (loadingState === 'loading') return <div className="p-8 text-center">... loading weather-data ...</div>;
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
         {/* Creation Date Card */}
-        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm md:min-h-[260px]">
+        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
           <h3 className="text-[10px] font-black text-slate-400 uppercase mb-4 tracking-widest">
             Creation Date Range
           </h3>
@@ -26,7 +23,7 @@ export default function InfoTab({ loadingState, stats, maeStatsLoadingState, mae
         </div>
 
         {/* Prog Date Card */}
-        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm md:min-h-[260px]">
+        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
           <h3 className="text-[10px] font-black text-slate-400 uppercase mb-4 tracking-widest">
             Prognosis Date Range
           </h3>
@@ -42,18 +39,8 @@ export default function InfoTab({ loadingState, stats, maeStatsLoadingState, mae
           </div>
         </div>
 
-        {/* Graph Card (double width + height) */}
-        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm md:col-span-2 md:min-h-[520px] flex flex-col">
-          <h3 className="text-[10px] font-black text-slate-400 uppercase mb-4 tracking-widest">
-            Plot Stack
-          </h3>
-          <div className="flex-grow">
-            <GraphStack maeStats={maeStats} />
-          </div>
-        </div>
-
       </div>
-
+      
       {/* Status-Anzeige */}
       <div className="text-center py-4 space-y-2">
         <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase ${

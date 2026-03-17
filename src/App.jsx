@@ -10,6 +10,8 @@ export default function App() {
   const [stats, setStats] = useState({ creation_date_min: '', creation_date_max: '', prog_date_min: '', prog_date_max: '' });
   const [typeSelection, setTypeSelection] = useState('backward');
   const [dateSelection, setDateSelection] = useState('');
+  const [maeStats, setMaeStats] = useState([]);
+  const [maeStatsLoadingState, setMaeStatsLoadingState] = useState('idle');
 
   useEffect(() => {
     const loadData = async () => {
@@ -31,10 +33,38 @@ export default function App() {
             setWeatherData(data);
             setLoadingState('success');
             setDateSelection(newStats.prog_date_max);
+
+            // Now load MAE stats
+            loadMaeStats();
           }
         });
       } catch (e) { setLoadingState('error'); }
     };
+
+    const loadMaeStats = async () => {
+      setMaeStatsLoadingState('loading');
+      try {
+        const response = await fetch('./mae_stats.csv');
+        const csvText = await response.text();
+        Papa.parse(csvText, {
+          header: true, dynamicTyping: true, skipEmptyLines: true,
+          complete: (results) => {
+            const data = results.data;
+            setMaeStats(data);
+            setMaeStatsLoadingState('success');
+            console.log('MAE Stats loaded successfully:', data.length, 'rows');
+          },
+          error: (error) => {
+            console.error('Error loading MAE Stats:', error);
+            setMaeStatsLoadingState('error');
+          }
+        });
+      } catch (e) {
+        console.error('Failed to load MAE Stats:', e);
+        setMaeStatsLoadingState('error');
+      }
+    };
+
     loadData();
   }, []);
 
@@ -152,7 +182,7 @@ export default function App() {
       </nav>
 
       <main className="flex-grow container mx-auto p-6 max-w-7xl">
-        {activeTab === 'info' && <InfoTab loadingState={loadingState} stats={stats} />}
+        {activeTab === 'info' && <InfoTab loadingState={loadingState} stats={stats} maeStatsLoadingState={maeStatsLoadingState} maeStats={maeStats} />}
         {activeTab === 'plot' && (
           <PlotTab 
             typeSelection={typeSelection} setTypeSelection={setTypeSelection}
